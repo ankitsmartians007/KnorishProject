@@ -1,0 +1,11 @@
+C:\Users\LENOVO\source\repos\Knorish\Models\obj\Debug\Models.csprojAssemblyReference.cache
+C:\Users\LENOVO\source\repos\Knorish\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\source\repos\Knorish\Models\bin\Debug\Models.dll
+C:\Users\LENOVO\source\repos\Knorish\Models\bin\Debug\Models.pdb
+C:\Users\LENOVO\source\repos\Knorish\Models\obj\Debug\Models.dll
+C:\Users\LENOVO\source\repos\Knorish\Models\obj\Debug\Models.pdb
+C:\Knorish\Models\bin\Debug\Models.dll
+C:\Knorish\Models\bin\Debug\Models.pdb
+C:\Knorish\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Knorish\Models\obj\Debug\Models.dll
+C:\Knorish\Models\obj\Debug\Models.pdb

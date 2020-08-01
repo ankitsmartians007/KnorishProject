@@ -1,0 +1,166 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="registerModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register Boat</h4>
+            </div>
+            <div class="modal-body">
+                <div id="RegBoat">
+                    <div class="container">
+                        <div id="login-row" class="row justify-content-center align-items-center">
+                            <div id="login-column" class="col-md-6">
+                                <div id="login-box" class="col-md-12">
+                                    <form id="login-form" class="form" action="" method="post">
+
+                                        <div class="form-group">
+                                            <label for="boatName" class="text-info">Boat Name:</label><br>
+                                            <input type="text" name="boatName" id="boatName" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rate" class="text-info">Hourly Rate:</label><br>
+                                            <input type="text" name="rate" id="rate" class="form-control" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="button" name="submit" class="btn btn-info btn-md" value="Register" id="reg_btn">
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="rentModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Rent Boat</h4>
+            </div>
+            <div class="modal-body">
+                <div id="RenBoat">
+                    <div class="container">
+                        <div id="login-row" class="row justify-content-center align-items-center">
+                            <div id="login-column" class="col-md-6">
+                                <div id="login-box" class="col-md-12">
+                                    <form id="login-form" class="form" action="" method="post">
+
+                                        <div class="form-group">
+                                            <label for="boatId" class="text-info">Boat ID:</label><br>
+                                            <input type="text" name="boatId" id="boatId" class="form-control" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customerName" class="text-info">Customer Name:</label><br>
+                                            <input type="text" name="rate" id="customerName" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="button" name="submit" class="btn btn-info btn-md" value="Rent" id="rent_btn">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    function IsNumeric(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        // document.getElementById("error").style.display = ret ? "none" : "inline";
+        return ret;
+    }
+    $(document).ready(function () {
+
+        $('#registerModal').on('show.bs.modal', function (e) {
+            $('#boatName').val('');
+            $('#rate').val('')
+        })
+        $('#rentModal').on('show.bs.modal', function (e) {
+            $('#customerName').val('');
+            $('#boatId').val('');
+        })
+        $('#reg_btn').on('click', function () {
+            var boatName = $('#boatName').val();
+            var rate = $('#rate').val();
+            if (boatName == '') {
+                alert('please enter Boat Name.');
+            }
+            else if (rate == '') {
+                alert('Please enter Hourly Rate.')
+            }
+            else {
+                var obj = {
+                    'BoatName': boatName,
+                    'HourlyRate': rate
+                }
+                $.ajax({
+                    url: '/Home/AddBoat',
+                    type: 'POST',
+                    data: { 'model': obj },
+                    success: function (data) {
+                        if (data.status == false)
+                            alert(data.Msg);
+                        else {
+                            $('#registerModal').modal('hide');
+                            alert(data.Msg);
+                        }
+                    }
+                })
+            }
+        })
+
+        $('#rent_btn').on('click', function () {
+            var customerName = $('#customerName').val();
+            var boatId = $('#boatId').val();
+            if (boatId == '') {
+                alert('please enter BoatId.');
+            }
+            else if (customerName == '') {
+                alert('Please enter customer Name.')
+            }
+            else {
+                var obj = {
+                    'CustomerName': customerName,
+                    'BoatId': boatId
+                }
+                $.ajax({
+                    url: '/Home/RentBoat',
+                    type: 'POST',
+                    data: { 'model': obj },
+                    success: function (data) {
+                        if (data.status == false)
+                            alert(data.Msg);
+                        else {
+                            $('#rentModal').modal('hide');
+                            alert(data.Msg);
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>

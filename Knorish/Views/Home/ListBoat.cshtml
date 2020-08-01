@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Models.Models.Boat>
+
+@{
+    ViewBag.Title = "ListBoat";
+}
+
+<h2>ListBoat</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BoatId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BoatName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HourlyRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HourlyRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            
+        </tr>
+    }
+
+</table>
